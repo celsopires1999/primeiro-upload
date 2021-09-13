@@ -12,6 +12,8 @@ class GenreControllerTest extends TestCase
 {
     use DatabaseMigrations, TestValidations, TestSaves;
     
+    private $genre;
+
     protected function setUp(): void
     {
         parent::setUp();

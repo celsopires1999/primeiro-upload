@@ -12,6 +12,8 @@ class CategoryControllerTest extends TestCase
 {
     use DatabaseMigrations, TestValidations, TestSaves;
 
+    private $category;
+
     protected function setUp(): void
     {
         parent::setUp();
