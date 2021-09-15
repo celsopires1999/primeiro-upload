@@ -1,0 +1,6 @@
+{
+    "php.suggest.basic": false,
+    "better-phpunit.phpunitBinary": "/workspace/vendor/bin/phpunit",
+    "terminal.integrated.automationShell.linux": "/bin/bash",
+    "terminal.integrated.defaultProfile.linux": "bash"
+}

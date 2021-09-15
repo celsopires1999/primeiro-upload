@@ -13,7 +13,6 @@ npm-debug.log
 yarn-error.log
 .docker/dbdata/
 .idea/
-.vscode/
 .history/
 .devcontainer/
 _ide_helper_models.php

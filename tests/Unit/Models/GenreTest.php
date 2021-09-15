@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\ModelsUnit;
+namespace Tests\Models\Unit;
 
 use Tests\TestCase;
 use App\Models\Genre;
