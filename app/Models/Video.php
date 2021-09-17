@@ -9,7 +9,7 @@ class Video extends Model
 {
     use SoftDeletes, Traits\Uuid;
 
-    const RATING_LIST =['L', '10', '12', '14', '16', '18'];
+    const RATING_LIST = ['L', '10', '12', '14', '16', '18'];
 
     protected $fillable = [
         'title',
@@ -23,8 +23,18 @@ class Video extends Model
     protected $casts = [
         'id' => 'string',
         'opened' => 'boolean',
-        'year_launched' =>'integer',
+        'year_launched' => 'integer',
         'duration' => 'integer'
     ];
     public $incrementing = false;
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+
+    public function genres()
+    {
+        return $this->belongsToMany(Genre::class);
+    }
 }
