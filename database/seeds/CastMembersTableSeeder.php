@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class CastMemberTableSeeder extends Seeder
+class CastMembersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class CastMemberTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\CastMember::class, 100)->create();
+        factory(\App\Models\CastMember::class, 100)->create();  
     }
 }

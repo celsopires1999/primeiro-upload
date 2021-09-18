@@ -27,7 +27,8 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"bmewburn.vscode-intelephense-client",
-		"calebporzio.better-phpunit"
+		"calebporzio.better-phpunit",
+		"felixfbecker.php-debug"
 	]
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
