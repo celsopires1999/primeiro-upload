@@ -34,7 +34,7 @@ class VideoController extends BasicCrudController
             return $obj;
         });
         
-        $obj->refresh();
+        $obj->refresh()->load(['categories', 'genres']);;
         return $obj;
     }
 
@@ -49,6 +49,8 @@ class VideoController extends BasicCrudController
             $self->handleRelations($obj, $request);
             return $obj;
         });
+
+        $obj->load(['categories', 'genres']);
         return $obj;
     }
 
