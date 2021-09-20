@@ -6,7 +6,7 @@ use App\Models\Category;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Traits\Uuid;
 
-class CategoryTest extends TestCase
+class CategoryUnitTest extends TestCase
 {
     use SoftDeletes, Uuid;
 
