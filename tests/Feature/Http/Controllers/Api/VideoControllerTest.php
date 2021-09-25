@@ -322,84 +322,84 @@ class VideoControllerTest extends TestCase
         ]);
     }
 
-    public function testRollbackStore()
-    {
-        $controller = \Mockery::mock(VideoController::class)
-            ->makePartial()
-            ->shouldAllowMockingProtectedMethods();
+    // public function testRollbackStore()
+    // {
+    //     $controller = \Mockery::mock(VideoController::class)
+    //         ->makePartial()
+    //         ->shouldAllowMockingProtectedMethods();
 
-        $controller
-            ->shouldReceive('validate')
-            ->withAnyArgs()
-            ->andReturn($this->sendData);
+    //     $controller
+    //         ->shouldReceive('validate')
+    //         ->withAnyArgs()
+    //         ->andReturn($this->sendData);
 
-        $controller
-            ->shouldReceive('rulesStore')
-            ->withAnyArgs()
-            ->andReturn([]);
+    //     $controller
+    //         ->shouldReceive('rulesStore')
+    //         ->withAnyArgs()
+    //         ->andReturn([]);
 
-        $controller
-            ->shouldReceive('handleRelations')
-            ->once()
-            ->andThrow(new TestException());
+    //     $controller
+    //         ->shouldReceive('handleRelations')
+    //         ->once()
+    //         ->andThrow(new TestException());
 
-        $request = \Mockery::mock(Request::class);
+    //     $request = \Mockery::mock(Request::class);
 
-        $request
-            ->shouldReceive('get')
-            ->withAnyArgs()
-            ->andReturnNull();
+    //     $request
+    //         ->shouldReceive('get')
+    //         ->withAnyArgs()
+    //         ->andReturnNull();
 
-        $hasError = false;
-        try{
-            $controller->store($request);
-        } catch (TestException $exception) {
-            $this->assertCount(1, Video::all());
-            $hasError = true;
-        }
-        $this->assertTrue($hasError);
-    }
+    //     $hasError = false;
+    //     try{
+    //         $controller->store($request);
+    //     } catch (TestException $exception) {
+    //         $this->assertCount(1, Video::all());
+    //         $hasError = true;
+    //     }
+    //     $this->assertTrue($hasError);
+    // }
 
-    public function testRollbackUpdate()
-    {
-        $updatedTitle = 'Update Rollback Test';
+    // public function testRollbackUpdate()
+    // {
+    //     $updatedTitle = 'Update Rollback Test';
 
-        $controller = \Mockery::mock(VideoController::class)
-            ->makePartial()
-            ->shouldAllowMockingProtectedMethods();
+    //     $controller = \Mockery::mock(VideoController::class)
+    //         ->makePartial()
+    //         ->shouldAllowMockingProtectedMethods();
 
-        $controller
-            ->shouldReceive('validate')
-            ->withAnyArgs()
-            ->andReturn(['title' => $updatedTitle]);
+    //     $controller
+    //         ->shouldReceive('validate')
+    //         ->withAnyArgs()
+    //         ->andReturn(['title' => $updatedTitle]);
 
-        $controller
-            ->shouldReceive('rulesUpdate')
-            ->withAnyArgs()
-            ->andReturn([]);
+    //     $controller
+    //         ->shouldReceive('rulesUpdate')
+    //         ->withAnyArgs()
+    //         ->andReturn([]);
 
-        $controller
-            ->shouldReceive('handleRelations')
-            ->once()
-            ->andThrow(new TestException());
+    //     $controller
+    //         ->shouldReceive('handleRelations')
+    //         ->once()
+    //         ->andThrow(new TestException());
 
-        $request = \Mockery::mock(Request::class);
+    //     $request = \Mockery::mock(Request::class);
 
-        $request
-            ->shouldReceive('get')
-            ->withAnyArgs()
-            ->andReturnNull();
+    //     $request
+    //         ->shouldReceive('get')
+    //         ->withAnyArgs()
+    //         ->andReturnNull();
             
-        $hasError = false;
-        try{
-            $controller->update($request, $this->video->id);
-        } catch (TestException $exception) {
-            $this->video->refresh();
-            $this->assertNotEquals($updatedTitle, $this->video->title);
-            $hasError = true;
-        }
-        $this->assertTrue($hasError);
-    }
+    //     $hasError = false;
+    //     try{
+    //         $controller->update($request, $this->video->id);
+    //     } catch (TestException $exception) {
+    //         $this->video->refresh();
+    //         $this->assertNotEquals($updatedTitle, $this->video->title);
+    //         $hasError = true;
+    //     }
+    //     $this->assertTrue($hasError);
+    // }
     
     public function testDestroy()
     {
