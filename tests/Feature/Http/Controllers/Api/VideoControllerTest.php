@@ -12,6 +12,7 @@ use Tests\Traits\TestSaves;
 use Tests\Traits\TestValidations;
 use Tests\Exceptions\TestException;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 
 class VideoControllerTest extends TestCase
 {
@@ -157,6 +158,22 @@ class VideoControllerTest extends TestCase
         $this->assertInvalidationInUpdateAction($data,'in');          
     }
 
+    public function testInvalidationVideo()
+    {
+        $file = UploadedFile::fake()->create('video_file.xyz');
+        $reponse = $this->json('POST', $this->routeStore(), [
+            'video_file' => $file
+        ]);
+        $this->assertInvalidationFields($reponse, ['video_file'], 'mimetypes', ['values' => 'video/mp4']);
+
+        $file = UploadedFile::fake()->create('video_file.mp4')->size(13);
+        $reponse = $this->json('POST', $this->routeStore(), [
+            'video_file' => $file
+        ]);
+        $this->assertInvalidationFields($reponse, ['video_file'], 'max.file', ['max' => 12]);
+
+    }
+
     public function testSave()
     {
         $category = factory(Category::class)->create();
@@ -218,6 +235,28 @@ class VideoControllerTest extends TestCase
                 $value['send_data']['genres_id'][0]
             );
         }
+    }
+
+    public function testSaveFile()
+    {
+        $category = factory(Category::class)->create();
+        $genre = factory(Genre::class)->create();
+        $genre->categories()->sync([$category->id]);
+
+        $relations = [
+            'categories_id' => [$category->id],
+            'genres_id' => [$genre->id]
+        ];
+
+        \Storage::fake();
+        $file = UploadedFile::fake()->create('video_file.mp4');
+
+        $response = $this->json('POST', $this->routeStore(), 
+            $this->sendData + $relations + ['video_file' => $file]
+        );
+        $response->assertStatus(201);
+        $id = $response->json('id');
+        \Storage::assertExists("$id/{$file->hashName()}");
     }
 
     protected function assertHasCategory($videoId, $categoryId)
